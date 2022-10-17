@@ -23,9 +23,71 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+  let res = [];
+  for (let i = 0; i < matrix.length; i++) {
+    let acc = [];
+    for (let l = 0; l < matrix[i].length; l++) {
+      let c = 0;
+      if (l == 0) {
+        if (matrix[i][l + 1]) c++
+        if (i != 0 && i != matrix.length - 1) {
+          if (matrix[i + 1][l]) c++
+          if (matrix[i + 1][l + 1]) c++
+          if (matrix[i - 1][l]) c++
+          if (matrix[i - 1][l + 1]) c++
+        } else if (i == 0) {
+          if (matrix[i + 1][l]) c++
+          if (matrix[i + 1][l + 1]) c++
+        } else if (i == matrix.length - 1) {
+          if (matrix[i - 1][l]) c++
+          if (matrix[i - 1][l + 1]) c++
+        }
+      }
+// -------------------------------------------------
+      else if (l == matrix[i].length - 1) {
+        if (matrix[i][l - 1]) c++
+        if (i != 0 && i != matrix.length - 1) {
+          if (matrix[i + 1][l]) c++
+          if (matrix[i + 1][l - 1]) c++
+          if (matrix[i - 1][l]) c++
+          if (matrix[i - 1][l - 1]) c++
+        } else if (i == 0) {
+          if (matrix[i + 1][l]) c++
+          if (matrix[i + 1][l - 1]) c++
+        } else if (i == matrix.length - 1) {
+          if (matrix[i - 1][l]) c++
+          if (matrix[i - 1][l - 1]) c++
+        }
+      }
+// -------------------------------------------------
+      else if (l != 0 && l != matrix[i].length - 1) {
+        if (matrix[i][l - 1]) c++
+        if (matrix[i][l + 1]) c++
+        if (i != 0 && i != matrix.length - 1) {
+          if (matrix[i + 1][l]) c++
+          if (matrix[i + 1][l - 1]) c++
+          if (matrix[i - 1][l]) c++
+          if (matrix[i - 1][l - 1]) c++
+          if (matrix[i + 1][l + 1]) c++
+          if (matrix[i - 1][l + 1]) c++
+        }
+        else if (i == 0) {
+          if (matrix[i + 1][l]) c++
+          if (matrix[i + 1][l - 1]) c++
+          if (matrix[i + 1][l + 1]) c++
+        }
+        else if (i == matrix.length - 1) {
+          if (matrix[i - 1][l]) c++
+          if (matrix[i - 1][l - 1]) c++
+          if (matrix[i - 1][l + 1]) c++
+        }
+      }
+      acc.push(c)
+    }
+    res.push(acc)
+  }
+  return res
 }
 
 module.exports = {
